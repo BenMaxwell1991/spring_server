@@ -1,30 +1,33 @@
 package com.maxwell;
 
 import exceptions.InvalidHeaderException;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
-import java.util.stream.Stream;
 
 @RestController
 public class MyRestController {
 
-    @RequestMapping(value = "/resultstring", method = RequestMethod.POST)
-    public String getResultString(@RequestHeader Map<String, String> headers, @RequestBody String config) {
+    /*
+    * when accessing address/resultstream, passes in the model config file
+    * and returns a stream of the results object in JSon format
+    */
+    @RequestMapping(value = "/resultstream", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void getResultStream(@RequestHeader Map<String, String> headers, @RequestBody String config, HttpServletResponse response) {
         String contentType = headers.get("content-type");
         if (!("application/json".equals(contentType))) {
             throw new InvalidHeaderException();
         }
-        String output = EntryPoint.getResultString(config);
-        return "results: " + output;
-    }
-
-    @RequestMapping(value = "/resultstream", method = RequestMethod.POST)
-    public Stream<String> getResultStream(@RequestHeader Map<String, String> headers, @RequestBody String config) {
-        String contentType = headers.get("content-type");
-        if (!("application/json".equals(contentType))) {
-            throw new InvalidHeaderException();
+        OutputStream outputStream = null;
+        try {
+            outputStream = response.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return EntryPoint.getResultStream(config);
+        EntryPoint.getResultStream(config, outputStream);
     }
 }
