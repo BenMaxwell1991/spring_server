@@ -30,4 +30,17 @@ public class MyRestController {
         }
         EntryPoint.getResultStream(config, outputStream);
     }
+
+    /*
+     * when accessing address/resultimages, returns graphs of each population using the result data
+     * Does not currently work (need to finish returning graphs as streamed data
+     */
+    @RequestMapping(value = "/resultimages", method = RequestMethod.POST)
+    public void getResultImages(@RequestHeader Map<String, String> headers, @RequestBody String config) {
+        String contentType = headers.get("content-type");
+        if (!("application/json".equals(contentType))) {
+            throw new InvalidHeaderException();
+        }
+        EntryPoint.getResultImages(config);
+    }
 }

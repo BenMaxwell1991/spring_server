@@ -5,8 +5,7 @@ plugins {
 }
 
 group = 'com.maxwell'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '14'
+version = '1.0-SNAPSHOT'
 
 configurations {
 	developmentOnly
