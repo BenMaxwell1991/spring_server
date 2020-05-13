@@ -1,0 +1,57 @@
+{
+  "simulationParameters": {
+    "t": 0.0,
+    "dt": 0.001,
+    "maxt": 20.0,
+    "outputRes": 200,
+    "rungeKuttaClassName": "com.maxwell.simulation.methods.SimpleEuler"
+  },
+  "populationParameters": {
+    "groups": [
+      {
+        "name": "Young People (Rapid Spreaders)",
+        "parameters": {
+          "recoveryRate": 1.0,
+          "sirValues": {
+            "s": {
+              "value": 0.49
+            },
+            "i": {
+              "value": 0.01
+            },
+            "r": {
+              "value": 0.0
+            }
+          }
+        }
+      },
+      {
+        "name": "Old People (Unshielded)",
+        "parameters": {
+          "recoveryRate": 1.0,
+          "sirValues": {
+            "s": {
+              "value": 0.5
+            },
+            "i": {
+              "value": 0.0
+            },
+            "r": {
+              "value": 0.0
+            }
+          }
+        }
+      }
+    ],
+    "transmissionRates": [
+      [
+        3.2,
+        1.2
+      ],
+      [
+        1.5,
+        1.2
+      ]
+    ]
+  }
+}
