@@ -16,7 +16,7 @@ public class MyRestController {
     * when accessing address/resultstream, passes in the model config file
     * and returns a stream of the results object in JSon format
     */
-    @CrossOrigin(origins = "*")
+    @CrossOrigin()
     @RequestMapping(value = "/resultstream", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public void getResultStream(@RequestHeader Map<String, String> headers, @RequestBody String config, HttpServletResponse response) {
         String contentType = headers.get("content-type");
